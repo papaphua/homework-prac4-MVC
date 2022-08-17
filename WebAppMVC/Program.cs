@@ -1,3 +1,7 @@
+global using Microsoft.EntityFrameworkCore;
+global using WebAppMVC.Data;
+global using WebAppMVC.Models;
+
 namespace WebAppMVC
 {
     public class Program
@@ -8,6 +12,10 @@ namespace WebAppMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Add db context.
+            builder.Services.AddDbContext<UserContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
